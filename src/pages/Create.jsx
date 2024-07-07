@@ -1,6 +1,7 @@
 import {
   Box,
   Button,
+  Center,
   Checkbox,
   FormControl,
   FormHelperText,
@@ -14,7 +15,8 @@ import { API_URL } from "../util/utils";
 
 export default function Create() {
   return (
-    <Box maxW="480px" p="20px">
+    <Center bg='tomato' color='white'>
+    <Box maxW="960px" p="20px" alignContent="center">
       <Form method="post" action="/create">
         <FormControl isRequired mb="40px">
           <FormLabel>Task Name</FormLabel>
@@ -42,6 +44,7 @@ export default function Create() {
         </Button>
       </Form>
     </Box>
+    </Center>
   );
 }
 
