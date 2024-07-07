@@ -16,9 +16,15 @@ import {
 import React, { useState, useEffect } from "react";
 import axios from "axios";
 import { API_URL } from "../util/utils";
+import { generateClient } from "aws-amplify/data";
+import { Amplify } from 'aws-amplify';
 
 export default function Home() {
   const [tasks, setTasks] = useState([]);
+
+  //const [todos, setTodos] = useState<Schema["Todo"][]>();
+  const [todo, setTodo] = useState("");
+  const client = generateClient();
 
   const fetchTasks = async () => {
     try {
@@ -31,8 +37,16 @@ export default function Home() {
     }
   };
 
+  async function getTodos() {
+    console.log("malakian getTodos home 2", data);
+    const { data } = await client.models.Post.list();
+    console.log("malakian getTodos home 3", data);
+    //setTodos(todos);
+  }
+
   useEffect(() => {
     fetchTasks();
+    getTodos();
   }, []);
 
   return (
