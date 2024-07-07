@@ -57,8 +57,8 @@ export const createAction = async ({ request }) => {
     isPriority: data.get("isPriority") === "",
   };
 
-  console.log("malakian title:", task.title);
-  console.log("malakian description:", task.description);
+  console.log("ezpay title:", task.title);
+  console.log("ezpay description:", task.description);
 
   try {
     await axios.post(API_URL, {

@@ -17,9 +17,12 @@ import React, { useState, useEffect } from "react";
 import axios from "axios";
 import { API_URL } from "../util/utils";
 import { generateClient } from "aws-amplify/data";
-import { Amplify } from 'aws-amplify';
+import { Amplify } from "aws-amplify";
+import outputs from "../../amplify_outputs.json";
 
 export default function Home() {
+  Amplify.configure(outputs);
+
   const [tasks, setTasks] = useState([]);
 
   //const [todos, setTodos] = useState<Schema["Todo"][]>();
@@ -29,7 +32,7 @@ export default function Home() {
   const fetchTasks = async () => {
     try {
       const { data } = await axios.get(API_URL);
-      console.log("malakian fetchTasks home 1", data);
+      console.log("ezpay fetchTasks home 1", data);
 
       setTasks(data);
     } catch (err) {
@@ -38,10 +41,9 @@ export default function Home() {
   };
 
   async function getTodos() {
-    console.log("malakian getTodos home 2", data);
     const { data } = await client.models.Post.list();
-    console.log("malakian getTodos home 3", data);
-    //setTodos(todos);
+    console.log("ezpay gen2 home 3", data);
+    setTodo(data);
   }
 
   useEffect(() => {
@@ -55,9 +57,9 @@ export default function Home() {
         <CardHeader>
           <Heading size="md"> Submissions dashboard</Heading>
         </CardHeader>
-        <CardBody>
+        <CardBody align="center">
           <Text>Your total submissions are</Text>
-          <Text>{tasks.length}</Text>
+          <Heading>{tasks.length}</Heading>
         </CardBody>
         <CardFooter>
           <Button>View here</Button>
@@ -65,10 +67,11 @@ export default function Home() {
       </Card>
       <Card>
         <CardHeader>
-          <Heading size="md"> Customer dashboard</Heading>
+          <Heading size="md"> Submissions dashboard V2</Heading>
         </CardHeader>
-        <CardBody>
-          <Text>View a summary of all your customers over the last month.</Text>
+        <CardBody align="center">
+          <Text>Your total submissions are</Text>
+          <Heading>{todo.length}</Heading>
         </CardBody>
         <CardFooter>
           <Button>View here</Button>

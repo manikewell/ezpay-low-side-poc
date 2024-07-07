@@ -25,7 +25,7 @@ export const MySubmissions = () => {
   const fetchTasks = async () => {
     try {
       const { data } = await axios.get(API_URL);
-      console.log("malakian fetchTasks 1", data);
+      console.log("ezpay fetchTasks 1", data);
 
       setTasks(data);
     } catch (err) {
